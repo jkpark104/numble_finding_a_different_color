@@ -11,10 +11,11 @@ function App(): JSX.Element {
   return (
     <>
       <Header>
-        <h1 className="title">Finding A Different Color</h1>
+        <h1 className="sr-only">Finding A Different Color</h1>
         <p>{`스테이지: ${info.stage}, 남은 시간: ${timer}, 점수: ${info.score}`}</p>
       </Header>
       <Board>
+        <h2 className="sr-only">Board</h2>
         <Board.Item />
         <Board.Item />
         <Board.Item />
