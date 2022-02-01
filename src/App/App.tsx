@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Header, Board } from '@/components';
 
 function App(): JSX.Element {
@@ -16,11 +16,15 @@ function App(): JSX.Element {
       </Header>
       <Board>
         <h2 className="sr-only">Board</h2>
-        <Board.Item />
-        <Board.Item />
-        <Board.Item />
-        <Board.Item />
-        <Board.Item />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
       </Board>
     </>
   );
