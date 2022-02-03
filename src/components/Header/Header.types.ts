@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { GameInfoProps } from '@/App/App.types';
+import { GameInfoProps } from '@/App/appReducer.types';
 
 export interface HeaderProps {
   children: ReactNode;
