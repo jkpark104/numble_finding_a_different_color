@@ -1,33 +1,33 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+import { initialState, reducer, chooseTheAnswer, chooseTheWrongAnswer } from './appReducer';
 import { Header, Board } from '@/components';
+import { useTimer, useBoardData, useGameOver } from '@/hooks';
 
-function App(): JSX.Element {
-  const info = {
-    stage: 1,
-    score: 0,
+export default function App(): JSX.Element {
+  const [gameInfos, dispatch] = useReducer(reducer, initialState);
+
+  const { stage, numberOfItems, remainingTime } = gameInfos;
+
+  useTimer(dispatch, remainingTime);
+
+  useGameOver(dispatch, gameInfos);
+
+  const onClick = (isAnswer: boolean): void => {
+    isAnswer ? dispatch(chooseTheAnswer(stage)) : dispatch(chooseTheWrongAnswer());
   };
-  const [timer, setTimer] = useState<number>(15);
+
+  const boardData = useBoardData(numberOfItems, stage);
 
   return (
     <>
       <Header>
-        <h1 className="sr-only">Finding A Different Color</h1>
-        <p>{`스테이지: ${info.stage}, 남은 시간: ${timer}, 점수: ${info.score}`}</p>
+        <Header.Title />
+        <Header.GameInfos gameInfos={gameInfos} />
       </Header>
       <Board>
-        <h2 className="sr-only">Board</h2>
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
-        <Board.Item className="w-[7.25rem] h-[7.25rem] bg-pink-800 m-[0.125rem]" />
+        <Board.Title />
+        <Board.Items length={numberOfItems} boardData={boardData} onClick={onClick} />
       </Board>
     </>
   );
 }
-
-export default App;
