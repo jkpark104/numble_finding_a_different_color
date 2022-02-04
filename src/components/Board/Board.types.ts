@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { BoardData } from '@/hooks/index';
+import { BoardData } from '@/hooks';
 
 export interface BoardProps {
   children: ReactNode;
