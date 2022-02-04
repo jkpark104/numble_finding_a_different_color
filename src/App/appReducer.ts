@@ -53,4 +53,8 @@ export const chooseTheAnswer = (stage: number): Action => ({
 
 export const chooseTheWrongAnswer = (): Action => ({ type: 'CHOOSE_THE_WRONG_ANSWER' });
 
+export const endGame = (): Action => ({ type: 'END_GAME' });
+
+export const timeGoes = (): Action => ({ type: 'TIME_GOES' });
+
 export const reset = (): Action => ({ type: 'RESET' });
