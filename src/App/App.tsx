@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useCallback } from 'react';
 import { initialState, reducer, chooseTheAnswer, chooseTheWrongAnswer } from './appReducer';
 import { Header, Board } from '@/components';
 import { useTimer, useBoardData, useGameOver } from '@/hooks';
@@ -12,9 +12,12 @@ export default function App(): JSX.Element {
 
   useGameOver(dispatch, gameInfos);
 
-  const onClick = (isAnswer: boolean): void => {
-    isAnswer ? dispatch(chooseTheAnswer(stage)) : dispatch(chooseTheWrongAnswer());
-  };
+  const onClick = useCallback(
+    (isAnswer: boolean): void => {
+      isAnswer ? dispatch(chooseTheAnswer(stage)) : dispatch(chooseTheWrongAnswer());
+    },
+    [stage]
+  );
 
   const boardData = useBoardData(numberOfItems, stage);
 

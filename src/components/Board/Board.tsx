@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { BoardProps, ItemsProps } from './Board.types';
 
 export function Board({ children }: BoardProps): JSX.Element {
@@ -8,7 +9,7 @@ Board.Title = function BoardTitle(): JSX.Element {
   return <h2 className="sr-only">Board</h2>;
 };
 
-Board.Items = function BoardItem({ boardData, length, onClick }: ItemsProps): JSX.Element {
+Board.Items = memo(function BoardItem({ boardData, length, onClick }: ItemsProps): JSX.Element {
   const { itemSize, indexOfanswer, rgbOfAnswer, rgbOfWrongAnswer } = boardData;
 
   return (
@@ -27,4 +28,4 @@ Board.Items = function BoardItem({ boardData, length, onClick }: ItemsProps): JS
       ))}
     </>
   );
-};
+});
