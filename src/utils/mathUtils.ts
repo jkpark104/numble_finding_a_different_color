@@ -15,7 +15,7 @@ export const getRgbArrayOfAnwer = (): number[] => {
 };
 
 export const getRgbArrayOfWrongAnswer = (arrayOfAnswer: number[], stage: number): number[] => {
-  const diff = 25 - Math.floor((stage + 1) / 3);
+  const diff = Math.max(1, 25 - Math.floor((stage + 1) / 3));
 
   return arrayOfAnswer.map((rgb) =>
     getRandomCount(2) ? Math.min(255, rgb + diff) : Math.max(0, rgb - diff)
