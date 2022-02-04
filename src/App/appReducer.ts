@@ -1,12 +1,13 @@
 import { Action, GameInfoProps } from './appReducer.types';
+import { INITIAL_NUMBER_OF_BOARD_ITEMS, MAX_LIMIT_SECONDS, ONE_SECOND } from './appConstants';
 import { getNumberOfBoardItem } from '@/utils';
 
 export const initialState = {
   isGameOver: false,
   stage: 1,
   score: 0,
-  numberOfItems: 4,
-  remainingTime: 15,
+  numberOfItems: INITIAL_NUMBER_OF_BOARD_ITEMS,
+  remainingTime: MAX_LIMIT_SECONDS,
 };
 
 export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => {
@@ -17,13 +18,13 @@ export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => 
         stage: state.stage + 1,
         score: state.remainingTime * state.stage ** 3,
         numberOfItems: action.payload.nextNumberOfItems,
-        remainingTime: 15,
+        remainingTime: MAX_LIMIT_SECONDS,
       };
 
     case 'CHOOSE_THE_WRONG_ANSWER':
       return {
         ...state,
-        remainingTime: Math.max(0, state.remainingTime - 3),
+        remainingTime: Math.max(0, state.remainingTime - 3 * ONE_SECOND),
       };
 
     case 'END_GAME':
@@ -35,7 +36,7 @@ export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => 
     case 'TIME_GOES':
       return {
         ...state,
-        remainingTime: Math.max(0, state.remainingTime - 1),
+        remainingTime: Math.max(0, state.remainingTime - ONE_SECOND),
       };
 
     case 'RESET':
