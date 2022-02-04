@@ -1,4 +1,4 @@
-# [Numble Project](https://www.numble.it/45cee9d3-49ad-4f67-9d2a-14607c2eeba7)
+# [Numble Project (링크)](https://www.numble.it/45cee9d3-49ad-4f67-9d2a-14607c2eeba7)
 
 - 블로그를 작성할 때는 다음과 같은 내용을 포함해주세요.
   - 주요 코드에 대한 설명
