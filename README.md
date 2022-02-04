@@ -9,7 +9,7 @@
 
 ## ■ 요구 사항
 
-![Untitled](Numble%20Project%202381d24385f64c6985dab3b36af543db/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/87417572/152546106-e1d2717e-3de9-4085-afa1-a69be7b81a4e.png)
 
 ### Functional Requirements
 
@@ -23,8 +23,9 @@
    1. 현재 stage의 남은 시간이 3초 줄어들어야 한다.
 6. 남은 시간이 0초 이하가 되면 게임이 종료돼야 한다.
 7. 게임이 종료되면 최종 stage와 누적 score를 출력하고, 새로운 게임을 시작할 수 있어야 한다.
+  
 
-   ![Untitled](Numble%20Project%202381d24385f64c6985dab3b36af543db/Untitled%201.png)
+   ![Untitled 1](https://user-images.githubusercontent.com/87417572/152546189-f87e8825-ce8c-40f4-b39b-d30b5096483f.png)
 
 8. stage가 올라갈수록 정답과 오답의 색상 차이가 줄어들어야 한다.
    - 값의 차이는 ± `diff = 25 - Math.floor((stage + 1) / 3);`의 규칙을 가져야 한다.
