@@ -9,19 +9,24 @@ import {
 } from '@/utils';
 
 export interface BoardData {
-  itemSize: string;
-  indexOfanswer: number;
+  sizeOfItem: string;
+  indexOfAnswer: number;
   rgbOfAnswer: string;
   rgbOfWrongAnswer: string;
 }
 
 export const useBoardData = (numberOfItems: number, stage: number): BoardData => {
   return useMemo(() => {
-    const itemSize = px2rem(getPixelSizeOfBoardItem(numberOfItems));
-    const indexOfanswer = getRandomCount(numberOfItems);
+    const sizeOfItem = px2rem(getPixelSizeOfBoardItem(numberOfItems));
+    const indexOfAnswer = getRandomCount(numberOfItems);
     const rgbArrayOfAnswer = getRgbArrayOfAnwer();
-    const rgbOfWrongAnswer = array2Rgb(getRgbArrayOfWrongAnswer(rgbArrayOfAnswer, stage));
+    const rgbArrayOfWrongAnswer = getRgbArrayOfWrongAnswer(rgbArrayOfAnswer, stage);
 
-    return { itemSize, indexOfanswer, rgbOfAnswer: array2Rgb(rgbArrayOfAnswer), rgbOfWrongAnswer };
+    return {
+      sizeOfItem,
+      indexOfAnswer,
+      rgbOfAnswer: array2Rgb(rgbArrayOfAnswer),
+      rgbOfWrongAnswer: array2Rgb(rgbArrayOfWrongAnswer),
+    };
   }, [stage, numberOfItems]);
 };

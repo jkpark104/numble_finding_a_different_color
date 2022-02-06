@@ -8,10 +8,6 @@ export default function App(): JSX.Element {
 
   const { stage, numberOfItems, remainingTime } = gameInfos;
 
-  useTimer(dispatch, remainingTime);
-
-  useGameOver(dispatch, gameInfos);
-
   const onClick = useCallback(
     (isAnswer: boolean): void => {
       isAnswer ? dispatch(chooseTheAnswer(stage)) : dispatch(chooseTheWrongAnswer());
@@ -20,6 +16,10 @@ export default function App(): JSX.Element {
   );
 
   const boardData = useBoardData(numberOfItems, stage);
+
+  useTimer(dispatch, remainingTime);
+
+  useGameOver(dispatch, gameInfos);
 
   return (
     <>

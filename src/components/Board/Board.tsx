@@ -10,7 +10,7 @@ Board.Title = function BoardTitle(): JSX.Element {
 };
 
 Board.Items = memo(function BoardItem({ boardData, length, onClick }: ItemsProps): JSX.Element {
-  const { itemSize, indexOfanswer, rgbOfAnswer, rgbOfWrongAnswer } = boardData;
+  const { sizeOfItem, indexOfAnswer, rgbOfAnswer, rgbOfWrongAnswer } = boardData;
 
   return (
     <>
@@ -19,11 +19,11 @@ Board.Items = memo(function BoardItem({ boardData, length, onClick }: ItemsProps
           key={index}
           className="m-[0.125rem]"
           style={{
-            width: itemSize,
-            height: itemSize,
-            backgroundColor: index === indexOfanswer ? rgbOfAnswer : rgbOfWrongAnswer,
+            width: sizeOfItem,
+            height: sizeOfItem,
+            backgroundColor: index === indexOfAnswer ? rgbOfAnswer : rgbOfWrongAnswer,
           }}
-          onClick={(): void => onClick(index === indexOfanswer)}
+          onClick={(): void => onClick(index === indexOfAnswer)}
         />
       ))}
     </>
