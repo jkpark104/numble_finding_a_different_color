@@ -1,9 +1,20 @@
+import {
+  MAX_WIDTH_PIXEL,
+  MARGIN_PIXEL,
+  MIN_RGB_DIFF,
+  MAX_RGB_DIFF,
+  MAX_RGB_VALUE,
+  MIN_RGB_VALUE,
+} from '@/App/appConstants';
+
 export const getNumberOfBoardItem = (stage: number): number => {
-  return Math.pow(Math.round((stage + 0.5) / 2) + 1, 2);
+  return (Math.round((stage + 0.5) / 2) + 1) ** 2;
 };
 
-export const getPixelSizeOfBoardItem = (boardItemNumber: number): number => {
-  return (360 - 4 * Math.sqrt(boardItemNumber)) / Math.sqrt(boardItemNumber);
+export const getPixelSizeOfBoardItem = (numberOfItems: number): number => {
+  const numberOfItemsInTheRow = Math.sqrt(numberOfItems);
+
+  return MAX_WIDTH_PIXEL / numberOfItemsInTheRow - 2 * MARGIN_PIXEL;
 };
 
 export const getRandomCount = (max: number): number => {
@@ -11,13 +22,15 @@ export const getRandomCount = (max: number): number => {
 };
 
 export const getRgbArrayOfAnwer = (): number[] => {
-  return Array.from({ length: 3 }, () => getRandomCount(256));
+  return Array.from({ length: 3 }, () => getRandomCount(MAX_RGB_VALUE + 1));
 };
 
 export const getRgbArrayOfWrongAnswer = (arrayOfAnswer: number[], stage: number): number[] => {
-  const diff = Math.max(1, 25 - Math.floor((stage + 1) / 3));
+  const differenceOfRGB = Math.max(MIN_RGB_DIFF, MAX_RGB_DIFF - Math.floor((stage + 1) / 3));
 
   return arrayOfAnswer.map((rgb) =>
-    getRandomCount(2) ? Math.min(255, rgb + diff) : Math.max(0, rgb - diff)
+    getRandomCount(2)
+      ? Math.min(MAX_RGB_VALUE, rgb + differenceOfRGB)
+      : Math.max(MIN_RGB_VALUE, rgb - differenceOfRGB)
   );
 };
