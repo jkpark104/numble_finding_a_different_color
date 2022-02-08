@@ -3,7 +3,6 @@ import { INITIAL_NUMBER_OF_BOARD_ITEMS, MAX_LIMIT_SECONDS, ONE_SECOND } from './
 import { getNumberOfBoardItem } from '@/utils';
 
 export const initialState = {
-  isGameOver: false,
   stage: 1,
   score: 0,
   numberOfItems: INITIAL_NUMBER_OF_BOARD_ITEMS,
@@ -27,12 +26,6 @@ export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => 
         remainingTime: Math.max(0, state.remainingTime - 3 * ONE_SECOND),
       };
 
-    case 'END_GAME':
-      return {
-        ...state,
-        isGameOver: true,
-      };
-
     case 'TIME_GOES':
       return {
         ...state,
@@ -49,12 +42,10 @@ export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => 
 
 export const chooseTheAnswer = (stage: number): Action => ({
   type: 'CHOOSE_THE_ANSWER',
-  payload: { nextNumberOfItems: getNumberOfBoardItem(stage) },
+  payload: { nextNumberOfItems: getNumberOfBoardItem(stage + 1) },
 });
 
 export const chooseTheWrongAnswer = (): Action => ({ type: 'CHOOSE_THE_WRONG_ANSWER' });
-
-export const endGame = (): Action => ({ type: 'END_GAME' });
 
 export const timeGoes = (): Action => ({ type: 'TIME_GOES' });
 
