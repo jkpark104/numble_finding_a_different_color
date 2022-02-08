@@ -1,15 +1,22 @@
-import { useEffect, Dispatch } from 'react';
+import { useEffect, useRef, Dispatch } from 'react';
 import { Action, GameInfoProps } from '@/App/appReducer.types';
 import { reset } from '@/App/appReducer';
 import { showAlert } from '@/utils';
 
 export const useGameOver = (dispatch: Dispatch<Action>, gameInfos: GameInfoProps): void => {
-  useEffect(() => {
-    const { isGameOver, stage, score } = gameInfos;
+  const isResetOngoing = useRef(false);
 
-    if (isGameOver) {
-      showAlert(stage, score);
-      dispatch(reset());
+  useEffect(() => {
+    const { stage, score, remainingTime } = gameInfos;
+
+    if (remainingTime === 0 && !isResetOngoing.current) {
+      isResetOngoing.current = true;
+
+      setTimeout(() => {
+        showAlert(stage, score);
+        dispatch(reset());
+        isResetOngoing.current = false;
+      }, 0);
     }
   }, [dispatch, gameInfos]);
 };
