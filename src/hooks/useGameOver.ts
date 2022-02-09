@@ -16,7 +16,7 @@ export const useGameOver = (dispatch: Dispatch<Action>, gameInfos: GameInfoProps
         showAlert(stage, score);
         dispatch(reset());
         isResetOngoing.current = false;
-      }, 0);
+      }, 1000);
     }
   }, [dispatch, gameInfos]);
 };
