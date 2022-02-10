@@ -3,6 +3,7 @@ import { INITIAL_NUMBER_OF_BOARD_ITEMS, MAX_LIMIT_SECONDS, ONE_SECOND } from './
 import { getNumberOfBoardItem } from '@/utils';
 
 export const initialState = {
+  isStageGoingOn: true,
   stage: 1,
   score: 0,
   numberOfItems: INITIAL_NUMBER_OF_BOARD_ITEMS,
@@ -35,6 +36,12 @@ export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => 
     case 'RESET':
       return { ...initialState };
 
+    case 'FINISH_STAGE':
+      return {
+        ...state,
+        isStageGoingOn: false,
+      };
+
     default:
       return state;
   }
@@ -50,3 +57,5 @@ export const chooseTheWrongAnswer = (): Action => ({ type: 'CHOOSE_THE_WRONG_ANS
 export const timeGoes = (): Action => ({ type: 'TIME_GOES' });
 
 export const reset = (): Action => ({ type: 'RESET' });
+
+export const finishGame = (): Action => ({ type: 'FINISH_STAGE' });
