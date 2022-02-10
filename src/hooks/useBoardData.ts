@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import {
   getPixelSizeOfBoardItem,
   getRandomCount,
@@ -7,6 +7,7 @@ import {
   array2Rgb,
   px2rem,
 } from '@/utils';
+import { GameInfoProps } from '@/App/appReducer.types';
 
 export interface BoardData {
   sizeOfItem: string;
@@ -15,18 +16,26 @@ export interface BoardData {
   rgbOfWrongAnswer: string;
 }
 
-export const useBoardData = (numberOfItems: number, stage: number): BoardData => {
+export const useBoardData = (gameInfos: GameInfoProps): BoardData => {
+  const boardData = useRef<BoardData>();
+
+  const { isStageGoingOn, numberOfItems, stage } = gameInfos;
+
   return useMemo(() => {
+    if (!isStageGoingOn && boardData.current) return boardData.current;
+
     const sizeOfItem = px2rem(getPixelSizeOfBoardItem(numberOfItems));
     const indexOfAnswer = getRandomCount(numberOfItems);
     const rgbArrayOfAnswer = getRgbArrayOfAnwer();
     const rgbArrayOfWrongAnswer = getRgbArrayOfWrongAnswer(rgbArrayOfAnswer, stage);
 
-    return {
+    boardData.current = {
       sizeOfItem,
       indexOfAnswer,
       rgbOfAnswer: array2Rgb(rgbArrayOfAnswer),
       rgbOfWrongAnswer: array2Rgb(rgbArrayOfWrongAnswer),
     };
-  }, [stage, numberOfItems]);
+
+    return boardData.current;
+  }, [numberOfItems, stage, isStageGoingOn]);
 };

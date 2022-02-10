@@ -15,7 +15,7 @@ export default function App(): JSX.Element {
     [stage]
   );
 
-  const boardData = useBoardData(numberOfItems, stage);
+  const boardData = useBoardData(gameInfos);
 
   useTimer(dispatch, remainingTime);
 
