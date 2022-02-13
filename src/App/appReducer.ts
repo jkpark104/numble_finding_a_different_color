@@ -16,7 +16,7 @@ export const reducer = (state: GameInfoProps, action: Action): GameInfoProps => 
       return {
         ...state,
         stage: state.stage + 1,
-        score: state.remainingTime * state.stage ** 3,
+        score: state.score + state.remainingTime * state.stage ** 3,
         numberOfItems: action.payload.nextNumberOfItems,
         remainingTime: MAX_LIMIT_SECONDS,
       };
